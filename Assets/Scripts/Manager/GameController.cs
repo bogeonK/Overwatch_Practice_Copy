@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
         Register<SkillManager, SkillManagerConfigSO>(config => new SkillManager(config));
         Register<SoundManager, SoundManagerConfigSO>(config => new SoundManager(config));
         Register<DecalPool, DecalPoolConfigSO>(config => new DecalPool(config));
+        Register<SceneLoadManager, SceneLoadManagerConfigSO>(config => new SceneLoadManager(config));
 
         GetControllerAll();
         InitAll();
@@ -113,6 +114,15 @@ public class GameController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (managerMap.TryGetValue(
+    typeof(SceneLoadManager),
+    out baseManager manager))
+        {
+            SceneLoadManager sceneLoadManager =
+                manager as SceneLoadManager;
+
+            sceneLoadManager?.OnSceneLoaded();
+        }
     }
 
 

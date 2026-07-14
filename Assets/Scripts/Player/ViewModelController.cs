@@ -11,7 +11,11 @@ public class ViewModelController : MonoBehaviour
     [Header("Fire Lock")]
     [SerializeField] private float fireBlockDuration = 0.18f;
 
+    [Header("Missile Lock")]
+    [SerializeField] private float missileBlockDuration = 0.25f;
+
     private float fireBlockTimer;
+    private float missileBlockTimer;
 
     private void Update()
     {
@@ -21,11 +25,14 @@ public class ViewModelController : MonoBehaviour
         if (fireBlockTimer > 0f)
             fireBlockTimer -= Time.deltaTime;
 
+        if (missileBlockTimer > 0f)
+            missileBlockTimer -= Time.deltaTime;
+
         bool isMoving = player.HasMoveInput();
         bool isGrounded = player.IsGrounded();
         bool dashInput = player.IsDashPressed();
 
-        bool isFireBlocking = fireBlockTimer > 0f || player.IsFirePressed();
+        bool isFireBlocking =fireBlockTimer > 0f || missileBlockTimer > 0f || player.IsFirePressed();
 
         bool dashPose = dashInput && isMoving && !isFireBlocking;
         bool dashBob = dashPose && isGrounded;
@@ -55,5 +62,19 @@ public class ViewModelController : MonoBehaviour
 
         if (recoil != null)
             recoil.PlayRecoil();
+    }
+
+    public void PlayMissile()
+    {
+        missileBlockTimer = missileBlockDuration;
+
+        if (bob != null)
+            bob.ResetBobImmediate();
+
+        if (dash != null)
+            dash.ResetDashImmediate();
+
+        if (recoil != null)
+            recoil.PlayHeavyRecoil();
     }
 }

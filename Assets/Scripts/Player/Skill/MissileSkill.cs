@@ -19,7 +19,7 @@ public class MissileSkill : MonoBehaviour, ISkill
     [SerializeField] private float cooldown = 8f;
 
     [Header("ViewModel")]
-    [SerializeField] private ViewModelRecoil viewModelRecoil;
+    [SerializeField] private ViewModelController viewModelController;
 
     [Header("Ultimate Gauge")]
     [SerializeField] private UltimateGauge ultimateGauge;
@@ -69,8 +69,8 @@ public class MissileSkill : MonoBehaviour, ISkill
         missile.SetDamage(normalAttackDamage * damageMultiplier);
         missile.SetUltimateGauge(ultimateGauge);
 
-        if (viewModelRecoil != null)
-            viewModelRecoil.PlayHeavyRecoil();
+        if (viewModelController != null)
+            viewModelController.PlayMissile();
 
         cooldownTimer = cooldown;
     }
