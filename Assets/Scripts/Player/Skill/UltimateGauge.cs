@@ -60,4 +60,10 @@ public class UltimateGauge : MonoBehaviour
             playerHUD.SetUltimateGauge(GetGaugeRatio(), GetGaugePercent());
         }
     }
+
+    public void SetPlayerHUD(PlayerHUD hud)
+    {
+        playerHUD = hud;
+        UpdateUI();
+    }
 }

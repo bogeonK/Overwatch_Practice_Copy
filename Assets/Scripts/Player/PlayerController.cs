@@ -57,6 +57,9 @@ public class PlayerController : MonoBehaviour
     private bool isDash;
     private int dashHash;
 
+    private bool controlLocked;
+    public bool IsControlLocked => controlLocked;
+
     private Rigidbody rb;
     private Animator anim;
 
@@ -112,6 +115,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (controlLocked)
+            return;
+
         ReadInput();
         StateMachine.Update();
         WeaponStateMachine.Update();
@@ -120,6 +126,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (controlLocked)
+            return;
         StateMachine.FixedUpdate();
     }
 
@@ -384,6 +392,25 @@ public class PlayerController : MonoBehaviour
     {
         useShiftAsDash = value;
     }
+    // 죽음 정지
+    public void SetControlLocked(bool locked)
+    {
+        controlLocked = locked;
+
+        if (!locked)
+            return;
+
+        moveInput = Vector2.zero;
+        moveDirection = Vector3.zero;
+
+        firePressed = false;
+        jumpPressed = false;
+        reloadPressed = false;
+        isDash = false;
+
+        anim.SetFloat(speedHash, 0f);
+        anim.SetBool(dashHash, false);
+    }
 
     private void UpdateAnimator()
     {
@@ -393,6 +420,10 @@ public class PlayerController : MonoBehaviour
         anim.SetBool(groundedHash, IsGrounded());
     }
 
-  
+    public void SetCameraTransform(Transform targetCamera)
+    {
+        cameraTransform = targetCamera;
+    }
+
 
 }

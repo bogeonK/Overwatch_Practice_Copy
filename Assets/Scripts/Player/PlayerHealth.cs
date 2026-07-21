@@ -72,4 +72,10 @@ public class PlayerHealth : MonoBehaviour, IHealable
     {
         Debug.Log("플레이어 사망");
     }
+
+    public void SetPlayerHUD(PlayerHUD hud)
+    {
+        playerHUD = hud;
+        UpdateHpUI();
+    }
 }

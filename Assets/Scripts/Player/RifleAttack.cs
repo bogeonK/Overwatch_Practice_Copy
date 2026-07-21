@@ -300,4 +300,15 @@ public class RifleAttack : MonoBehaviour, IWeaponAttack
 
         return bot.transform.position + Vector3.up;
     }
+
+    public void SetCameraTransform(Transform targetCamera)
+    {
+        cameraTransform = targetCamera;
+    }
+
+    public void SetPlayerHUD(PlayerHUD hud)
+    {
+        playerHUD = hud;
+        UpdateAmmoUI();
+    }
 }

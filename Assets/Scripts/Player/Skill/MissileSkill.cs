@@ -92,4 +92,9 @@ public class MissileSkill : MonoBehaviour, ISkill
 
         return ray.origin + ray.direction * aimRange;
     }
+
+    public void SetPlayerCamera(Camera targetCamera)
+    {
+        playerCamera = targetCamera;
+    }
 }

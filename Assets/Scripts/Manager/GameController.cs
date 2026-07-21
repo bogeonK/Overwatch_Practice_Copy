@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
         Register<SoundManager, SoundManagerConfigSO>(config => new SoundManager(config));
         Register<DecalPool, DecalPoolConfigSO>(config => new DecalPool(config));
         Register<SceneLoadManager, SceneLoadManagerConfigSO>(config => new SceneLoadManager(config));
-
+        Register<CharacterSelectionManager, CharacterSelectionManagerConfigSO>(config => new CharacterSelectionManager(config));
         GetControllerAll();
         InitAll();
         ActiveOffAll();

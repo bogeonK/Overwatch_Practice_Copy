@@ -63,4 +63,12 @@ public class UltimateSkill : MonoBehaviour, ISkill
 
         Debug.Log("궁극기 종료");
     }
+
+    public void SetUI(
+    UltimateUI newUltimateUI,
+    UltimateUIExpand newUltimateUIExpand)
+    {
+        ultimateUI = newUltimateUI;
+        ultimateUIExpand = newUltimateUIExpand;
+    }
 }

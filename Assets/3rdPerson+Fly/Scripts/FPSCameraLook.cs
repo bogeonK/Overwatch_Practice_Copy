@@ -6,6 +6,8 @@ public class FPSCameraLook : MonoBehaviour
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform cameraTarget;
 
+    public Transform CameraTarget => cameraTarget;
+
     [Header("Look Settings")]
     [SerializeField] private float mouseSensitivity = 200f;
     [SerializeField] private float minPitch = -80f;
